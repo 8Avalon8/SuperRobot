@@ -1,0 +1,113 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e4d221312677b548a319a9cdfdb3209, type: 3}
+  m_Name: TechTreeData
+  m_EditorClassIdentifier: 
+  _techNodes:
+  - TechId: basic_energy_1
+    TechName: "\u57FA\u7840\u80FD\u6E90\u7CFB\u7EDF"
+    Description: "\u6539\u8FDB\u57FA\u7840\u80FD\u6E90\u751F\u4EA7\u6280\u672F\uFF0C\u63D0\u9AD8\u673A\u7532\u80FD\u91CF\u5BB9\u91CF"
+    Prerequisites: []
+    ResearchCost: 100
+    Rewards:
+    - TechId: basic_energy_1
+      RewardType: 0
+      ResourceType: 4
+      Amount: 20
+      TargetId: 
+    Category: 0
+    TechLevel: 1
+    IsResearched: 0
+    Icon: {fileID: 0}
+    UIPosition: {x: 100, y: 100}
+  - TechId: advanced_energy_2
+    TechName: "\u9AD8\u7EA7\u80FD\u6E90\u7CFB\u7EDF"
+    Description: "\u5F00\u53D1\u9AD8\u6548\u80FD\u6E90\u7CFB\u7EDF\uFF0C\u5927\u5E45\u63D0\u9AD8\u673A\u7532\u80FD\u91CF\u8F93\u51FA"
+    Prerequisites:
+    - basic_energy_1
+    ResearchCost: 200
+    Rewards:
+    - TechId: advanced_energy_2
+      RewardType: 2
+      ResourceType: 0
+      Amount: 0
+      TargetId: beam_rifle_advanced
+    Category: 0
+    TechLevel: 2
+    IsResearched: 0
+    Icon: {fileID: 0}
+    UIPosition: {x: 200, y: 100}
+  - TechId: basic_weapons_1
+    TechName: "\u57FA\u7840\u6B66\u5668\u7CFB\u7EDF"
+    Description: "\u5F00\u53D1\u57FA\u7840\u673A\u7532\u6B66\u5668\u6280\u672F"
+    Prerequisites: []
+    ResearchCost: 100
+    Rewards:
+    - TechId: basic_weapons_1
+      RewardType: 2
+      ResourceType: 0
+      Amount: 0
+      TargetId: beam_rifle_basic
+    Category: 1
+    TechLevel: 1
+    IsResearched: 0
+    Icon: {fileID: 0}
+    UIPosition: {x: 100, y: 200}
+  - TechId: basic_defense_1
+    TechName: "\u57FA\u7840\u9632\u5FA1\u7CFB\u7EDF"
+    Description: "\u5F00\u53D1\u57FA\u7840\u673A\u7532\u88C5\u7532\u6280\u672F"
+    Prerequisites: []
+    ResearchCost: 100
+    Rewards:
+    - TechId: basic_defense_1
+      RewardType: 3
+      ResourceType: 0
+      Amount: 10
+      TargetId: 
+    Category: 2
+    TechLevel: 1
+    IsResearched: 0
+    Icon: {fileID: 0}
+    UIPosition: {x: 100, y: 300}
+  - TechId: basic_robotics_1
+    TechName: "\u57FA\u7840\u673A\u5668\u4EBA\u5DE5\u7A0B"
+    Description: "\u5F00\u53D1\u57FA\u7840\u673A\u7532\u8BBE\u8BA1\u6280\u672F"
+    Prerequisites: []
+    ResearchCost: 100
+    Rewards:
+    - TechId: basic_robotics_1
+      RewardType: 1
+      ResourceType: 0
+      Amount: 0
+      TargetId: mass_robot_basic
+    Category: 5
+    TechLevel: 1
+    IsResearched: 0
+    Icon: {fileID: 0}
+    UIPosition: {x: 100, y: 400}
+  - TechId: newtype_research_1
+    TechName: "\u65B0\u4EBA\u7C7B\u6F5C\u80FD\u7814\u7A76"
+    Description: "\u7814\u7A76\u4EBA\u7C7B\u7CBE\u795E\u529B\u4E0E\u673A\u7532\u7684\u534F\u540C\u7CFB\u7EDF"
+    Prerequisites:
+    - basic_robotics_1
+    ResearchCost: 300
+    Rewards:
+    - TechId: newtype_research_1
+      RewardType: 1
+      ResourceType: 0
+      Amount: 0
+      TargetId: gundam_basic
+    Category: 6
+    TechLevel: 3
+    IsResearched: 0
+    Icon: {fileID: 0}
+    UIPosition: {x: 300, y: 400}

@@ -1,0 +1,103 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 451f400050fd31b4fafcb2512efe6b93, type: 3}
+  m_Name: FacilityDatabase
+  m_EditorClassIdentifier: 
+  _facilityTemplates:
+  - FacilityId: basic_research_lab
+    FacilityName: "\u57FA\u7840\u7814\u7A76\u5B9E\u9A8C\u5BA4"
+    FacilityType: 0
+    Description: "\u63D0\u9AD8\u57FA\u5730\u7814\u7A76\u6548\u7387\uFF0C\u52A0\u5FEB\u6280\u672F\u7814\u53D1\u901F\u5EA6"
+    EffectValue: 10
+    MaintenanceCost: 100
+    RequiredTechnologies:
+    - basic_research
+  - FacilityId: advanced_research_lab
+    FacilityName: "\u9AD8\u7EA7\u7814\u7A76\u5B9E\u9A8C\u5BA4"
+    FacilityType: 0
+    Description: "\u5927\u5E45\u63D0\u9AD8\u57FA\u5730\u7814\u7A76\u6548\u7387\uFF0C\u663E\u8457\u52A0\u5FEB\u6280\u672F\u7814\u53D1\u901F\u5EA6"
+    EffectValue: 25
+    MaintenanceCost: 250
+    RequiredTechnologies:
+    - advanced_research
+  - FacilityId: basic_production_line
+    FacilityName: "\u57FA\u7840\u751F\u4EA7\u7EBF"
+    FacilityType: 1
+    Description: "\u63D0\u9AD8\u57FA\u5730\u751F\u4EA7\u6548\u7387\uFF0C\u51CF\u5C11\u5355\u4F4D\u751F\u4EA7\u65F6\u95F4"
+    EffectValue: 15
+    MaintenanceCost: 120
+    RequiredTechnologies:
+    - basic_production
+  - FacilityId: advanced_production_line
+    FacilityName: "\u9AD8\u7EA7\u751F\u4EA7\u7EBF"
+    FacilityType: 1
+    Description: "\u5927\u5E45\u63D0\u9AD8\u57FA\u5730\u751F\u4EA7\u6548\u7387\uFF0C\u663E\u8457\u51CF\u5C11\u5355\u4F4D\u751F\u4EA7\u65F6\u95F4"
+    EffectValue: 30
+    MaintenanceCost: 300
+    RequiredTechnologies:
+    - advanced_production
+  - FacilityId: basic_defense_turret
+    FacilityName: "\u57FA\u7840\u9632\u5FA1\u70AE\u5854"
+    FacilityType: 2
+    Description: "\u4E3A\u57FA\u5730\u63D0\u4F9B\u57FA\u7840\u9632\u5FA1\u80FD\u529B\uFF0C\u62B5\u5FA1\u5C0F\u89C4\u6A21\u653B\u51FB"
+    EffectValue: 15
+    MaintenanceCost: 80
+    RequiredTechnologies:
+    - basic_defense
+  - FacilityId: energy_shield_generator
+    FacilityName: "\u80FD\u91CF\u62A4\u76FE\u53D1\u751F\u5668"
+    FacilityType: 2
+    Description: "\u4E3A\u57FA\u5730\u63D0\u4F9B\u80FD\u91CF\u62A4\u76FE\u4FDD\u62A4\uFF0C\u5927\u5E45\u63D0\u9AD8\u9632\u5FA1\u80FD\u529B"
+    EffectValue: 35
+    MaintenanceCost: 250
+    RequiredTechnologies:
+    - energy_shield_tech
+  - FacilityId: standard_alloy_extractor
+    FacilityName: "\u6807\u51C6\u5408\u91D1\u63D0\u53D6\u5668"
+    FacilityType: 3
+    Description: "\u63D0\u9AD8\u57FA\u5730\u6807\u51C6\u5408\u91D1\u4EA7\u51FA"
+    EffectValue: 0
+    MaintenanceCost: 100
+    RequiredTechnologies:
+    - resource_extraction_1
+  - FacilityId: rare_metal_extractor
+    FacilityName: "\u7A00\u6709\u91D1\u5C5E\u63D0\u53D6\u5668"
+    FacilityType: 3
+    Description: "\u63D0\u4F9B\u7A00\u6709\u91D1\u5C5E\u8D44\u6E90\u4EA7\u51FA"
+    EffectValue: 0
+    MaintenanceCost: 150
+    RequiredTechnologies:
+    - resource_extraction_2
+  - FacilityId: energy_crystal_refinery
+    FacilityName: "\u80FD\u91CF\u6676\u4F53\u7CBE\u70BC\u5382"
+    FacilityType: 3
+    Description: "\u63D0\u4F9B\u80FD\u91CF\u6676\u4F53\u8D44\u6E90\u4EA7\u51FA"
+    EffectValue: 0
+    MaintenanceCost: 200
+    RequiredTechnologies:
+    - energy_crystal_tech
+  - FacilityId: pilot_training_center
+    FacilityName: "\u9A7E\u9A76\u5458\u8BAD\u7EC3\u4E2D\u5FC3"
+    FacilityType: 4
+    Description: "\u63D0\u9AD8\u9A7E\u9A76\u5458\u8BAD\u7EC3\u6548\u7387\uFF0C\u52A0\u5FEB\u7ECF\u9A8C\u83B7\u53D6\u901F\u5EA6"
+    EffectValue: 20
+    MaintenanceCost: 120
+    RequiredTechnologies:
+    - pilot_training
+  - FacilityId: newtype_lab
+    FacilityName: "\u65B0\u4EBA\u7C7B\u7814\u7A76\u5B9E\u9A8C\u5BA4"
+    FacilityType: 4
+    Description: "\u7814\u7A76\u548C\u57F9\u517BNT\u80FD\u529B\uFF0C\u63D0\u9AD8\u9A7E\u9A76\u5458\u6F5C\u529B\u4E0A\u9650"
+    EffectValue: 30
+    MaintenanceCost: 300
+    RequiredTechnologies:
+    - newtype_research

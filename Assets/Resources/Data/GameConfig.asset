@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13c294c60b1fe124cb51ff9d1d4dc956, type: 3}
+  m_Name: GameConfig
+  m_EditorClassIdentifier: Assembly-CSharp:SuperRobot:GameConfig
+  MaxTurns: 100
+  InitialFunds: 10000
+  DifficultyMultiplier: 1
+  BaseCriticalDamageMultiplier: 1.5
+  TerrainDefenseBonus: 0.2
+  DefaultActionPoints: 2
+  MaxBattleSize: 12
+  BaseResearchRate: 10
+  MaxResearchProjects: 3
+  ResearcherEfficiency: 5
+  BaseProductionRate: 5
+  MaxProductionQueue: 5
+  ProductionEfficiencyMultiplier: 1
+  ResourceDecayRate: 0.05
+  ResourceScarcityMultiplier: 1
+  StorageCapacityBase: 2000
+  AIAggressionBase: 0.5
+  AITechProgressionRate: 0.8
+  AIResourceMultiplier: 1.2
+  RandomEventChance: 0.3
+  EventCooldownTurns: 3
+  MaxActiveEvents: 5
+  SuperRobotProductionTimeMultiplier: 2.5
+  SuperRobotMaintenanceCostMultiplier: 3
+  ConventionalForceEfficiencyMultiplier: 0.8

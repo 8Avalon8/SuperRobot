@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56ca7ab16e721b1469eac3e43f9e81ed, type: 3}
+  m_Name: EventDatabase
+  m_EditorClassIdentifier: 
+  _storylines:
+  - StorylineId: alien_invasion
+    Name: "\u5916\u661F\u4EBA\u5165\u4FB5"
+    Description: "\u5730\u7403\u9762\u4E34\u6765\u81EA\u5916\u661F\u6587\u660E\u7684\u5165\u4FB5\u5A01\u80C1"
+    OneTimeOnly: 1
+    Events:
+    - EventId: alien_first_contact
+      Title: "\u9996\u6B21\u63A5\u89E6"
+      Description: "\u5929\u6587\u53F0\u63A2\u6D4B\u5230\u4E0D\u660E\u98DE\u884C\u7269\u63A5\u8FD1\u5730\u7403\u8F68\u9053\uFF0C\u8FD9\u53EF\u80FD\u662F\u4EBA\u7C7B\u9996\u6B21\u4E0E\u5916\u661F\u6587\u660E\u63A5\u89E6\u3002"
+      Choices:
+      - Description: "\u6D3E\u51FA\u7814\u7A76\u5C0F\u7EC4\u8C03\u67E5"
+        ResultDescription: "\u7814\u7A76\u5C0F\u7EC4\u6210\u529F\u6536\u96C6\u4E86\u5916\u661F\u6587\u660E\u7684\u57FA\u672C\u6570\u636E\uFF0C\u8FD9\u5C06\u6709\u52A9\u4E8E\u672A\u6765\u7684\u9632\u5FA1\u548C\u4EA4\u6D41\u3002"
+        IsTimeoutChoice: 0
+        ResourceEffects:
+        - ResourceType: 0
+          Amount: -500
+        TechnologyEffects:
+        - TechnologyId: alien_communication_tech
+          Unlock: 1
+          BoostProgress: 0
+        UnitEffects: []
+        PilotEffects: []
+        TriggerEventId: 
+      - Description: "\u6D3E\u51FA\u519B\u4E8B\u529B\u91CF\u6212\u5907"
+        ResultDescription: "\u519B\u4E8B\u90E8\u961F\u8FDB\u5165\u9AD8\u5EA6\u6212\u5907\u72B6\u6001\uFF0C\u867D\u7136\u6D88\u8017\u4E86\u5927\u91CF\u8D44\u6E90\uFF0C\u4F46\u589E\u5F3A\u4E86\u9632\u5FA1\u529B\u3002"
+        IsTimeoutChoice: 0
+        ResourceEffects:
+        - ResourceType: 0
+          Amount: -1000
+        - ResourceType: 2
+          Amount: -100
+        TechnologyEffects: []
+        UnitEffects: []
+        PilotEffects: []
+        TriggerEventId: 
+      - Description: "\u5C1D\u8BD5\u5EFA\u7ACB\u901A\u4FE1"
+        ResultDescription: "\u901A\u4FE1\u5C1D\u8BD5\u4F3C\u4E4E\u88AB\u63A5\u6536\u4E86\uFF0C\u4F46\u6CA1\u6709\u660E\u786E\u56DE\u5E94\u3002\u8FD9\u6B21\u63A5\u89E6\u5F15\u8D77\u4E86\u516C\u4F17\u7684\u5E7F\u6CDB\u5173\u6CE8\u3002"
+        IsTimeoutChoice: 0
+        ResourceEffects: []
+        TechnologyEffects: []
+        UnitEffects: []
+        PilotEffects: []
+        TriggerEventId: alien_communication_attempt
+      Duration: 5
+      RemainingTurns: 0
+      StorylineId: alien_invasion
+      Location: {x: 50, y: 50}
+      MinTurn: 10
+      MaxTurn: 0
+      PrerequisiteEvents: []
+      RequiredTechnologies: []
+      EvtType: 0

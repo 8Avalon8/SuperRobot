@@ -1,0 +1,127 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dabde0301afda6e4aa8899c7123e9fa2, type: 3}
+  m_Name: WeaponDatabase
+  m_EditorClassIdentifier: 
+  _weaponTemplates:
+  - WeaponId: beam_saber_basic
+    WeaponName: "\u57FA\u7840\u5149\u675F\u5251"
+    WeaponType: 0
+    Description: "\u57FA\u7840\u8FD1\u6218\u80FD\u91CF\u6B66\u5668\uFF0C\u9002\u7528\u4E8E\u591A\u79CD\u673A\u4F53"
+    BaseDamage: 100
+    Range: 1
+    EnergyCost: 10
+    Accuracy: 90
+    CriticalRate: 5
+    EffectValue: 0
+    EffectDuration: 0
+    RequiredTechnologies:
+    - melee_weapon_tech_1
+    CompatibleUnitTypes: 030000000500000004000000
+  - WeaponId: beam_saber_advanced
+    WeaponName: "\u9AD8\u7EA7\u5149\u675F\u5251"
+    WeaponType: 0
+    Description: "\u9AD8\u80FD\u91CF\u8F93\u51FA\u7684\u8FD1\u6218\u6B66\u5668\uFF0C\u66F4\u9AD8\u4F24\u5BB3\u4F46\u80FD\u8017\u66F4\u5927"
+    BaseDamage: 150
+    Range: 1
+    EnergyCost: 15
+    Accuracy: 90
+    CriticalRate: 8
+    EffectValue: 10
+    EffectDuration: 1
+    RequiredTechnologies:
+    - melee_weapon_tech_2
+    CompatibleUnitTypes: 050000000400000006000000
+  - WeaponId: beam_rifle_basic
+    WeaponName: "\u57FA\u7840\u5149\u675F\u6B65\u67AA"
+    WeaponType: 1
+    Description: "\u6807\u51C6\u914D\u7F6E\u7684\u8FDC\u7A0B\u80FD\u91CF\u6B66\u5668"
+    BaseDamage: 80
+    Range: 5
+    EnergyCost: 8
+    Accuracy: 85
+    CriticalRate: 5
+    EffectValue: 0
+    EffectDuration: 0
+    RequiredTechnologies:
+    - ranged_weapon_tech_1
+    CompatibleUnitTypes: 030000000500000001000000
+  - WeaponId: mega_cannon_basic
+    WeaponName: "\u57FA\u7840\u5DE8\u70AE"
+    WeaponType: 2
+    Description: "\u5927\u8303\u56F4\u8F70\u70B8\u6B66\u5668\uFF0C\u80FD\u5BF9\u591A\u4E2A\u76EE\u6807\u9020\u6210\u4F24\u5BB3"
+    BaseDamage: 120
+    Range: 4
+    EnergyCost: 25
+    Accuracy: 75
+    CriticalRate: 3
+    EffectValue: 0
+    EffectDuration: 0
+    RequiredTechnologies:
+    - heavy_weapon_tech_1
+    CompatibleUnitTypes: 000000000200000004000000
+  - WeaponId: hyper_beam_cannon
+    WeaponName: "\u8D85\u7EA7\u5149\u675F\u70AE"
+    WeaponType: 3
+    Description: "\u9AD8\u80FD\u76F4\u7EBF\u5149\u675F\u6B66\u5668\uFF0C\u8D2F\u7A7F\u529B\u6781\u5F3A"
+    BaseDamage: 200
+    Range: 6
+    EnergyCost: 40
+    Accuracy: 70
+    CriticalRate: 10
+    EffectValue: 0
+    EffectDuration: 0
+    RequiredTechnologies:
+    - beam_weapon_tech_2
+    CompatibleUnitTypes: 050000000400000007000000
+  - WeaponId: micro_missile_pod
+    WeaponName: "\u5FAE\u578B\u5BFC\u5F39\u53D1\u5C04\u5668"
+    WeaponType: 4
+    Description: "\u53D1\u5C04\u591A\u679A\u5C0F\u578B\u5BFC\u5F39\uFF0C\u9AD8\u547D\u4E2D\u7387"
+    BaseDamage: 60
+    Range: 4
+    EnergyCost: 15
+    Accuracy: 95
+    CriticalRate: 2
+    EffectValue: 0
+    EffectDuration: 0
+    RequiredTechnologies:
+    - missile_weapon_tech_1
+    CompatibleUnitTypes: 010000000500000008000000
+  - WeaponId: rocket_punch
+    WeaponName: "\u706B\u7BAD\u62F3"
+    WeaponType: 5
+    Description: "\u53D1\u5C04\u53EF\u63A7\u7684\u706B\u7BAD\u62F3\u8FDB\u884C\u8FDC\u7A0B\u6253\u51FB"
+    BaseDamage: 160
+    Range: 3
+    EnergyCost: 20
+    Accuracy: 80
+    CriticalRate: 15
+    EffectValue: 1
+    EffectDuration: 1
+    RequiredTechnologies:
+    - special_weapon_tech_1
+    CompatibleUnitTypes: 04000000
+  - WeaponId: psychic_wave
+    WeaponName: "\u7CBE\u795E\u6CE2"
+    WeaponType: 5
+    Description: "\u53D1\u5C04\u7CBE\u795E\u529B\u91CF\u51B2\u51FB\u6CE2\uFF0C\u65E0\u89C6\u90E8\u5206\u62A4\u7532"
+    BaseDamage: 180
+    Range: 4
+    EnergyCost: 35
+    Accuracy: 85
+    CriticalRate: 10
+    EffectValue: 20
+    EffectDuration: 2
+    RequiredTechnologies:
+    - psychic_tech_2
+    CompatibleUnitTypes: 0500000007000000

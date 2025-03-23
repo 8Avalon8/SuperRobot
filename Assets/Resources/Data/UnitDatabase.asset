@@ -1,0 +1,499 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3565c2df8247c314f980c05a92cd3473, type: 3}
+  m_Name: UnitDatabase
+  m_EditorClassIdentifier: 
+  _unitTemplates:
+  - UnitId: tank_basic
+    UnitName: "M-101 \u4E3B\u6218\u5766\u514B"
+    UnitType: 0
+    Description: "\u57FA\u7840\u5730\u9762\u4F5C\u6218\u5355\u4F4D\uFF0C\u914D\u590775mm\u4E3B\u70AE\uFF0C\u9002\u5408\u5730\u5F62\u9632\u5FA1\u6218"
+    ModelPrefabPath: Prefabs/Units/Tank_Basic
+    RequiresPilot: 0
+    MaxHealth: 120
+    MaxEnergy: 50
+    MovementRange: 3
+    BaseArmor: 30
+    DefaultWeapons:
+    - WeaponId: tank_cannon
+      WeaponName: "75mm\u5766\u514B\u70AE"
+      WeaponType: 1
+      Description: 
+      BaseDamage: 50
+      Range: 4
+      EnergyCost: 5
+      Accuracy: 85
+      CriticalRate: 5
+      EffectValue: 0
+      EffectDuration: 0
+      RequiredTechnologies: []
+      CompatibleUnitTypes: 
+    RequiredTechnologies:
+    - basic_ground_tech
+    SpecialAbilities: []
+  - UnitId: tank_advanced
+    UnitName: "MBT-200 \u91CD\u578B\u5766\u514B"
+    UnitType: 0
+    Description: "\u91CD\u578B\u5730\u9762\u5355\u4F4D\uFF0C\u914D\u5907120mm\u5149\u675F\u70AE\u548C\u52A0\u5F3A\u578B\u88C5\u7532\uFF0C\u9002\u5408\u653B\u575A\u6218"
+    ModelPrefabPath: Prefabs/Units/Tank_Heavy
+    RequiresPilot: 1
+    MaxHealth: 200
+    MaxEnergy: 80
+    MovementRange: 2
+    BaseArmor: 50
+    DefaultWeapons:
+    - WeaponId: heavy_beam_cannon
+      WeaponName: "120mm\u5149\u675F\u70AE"
+      WeaponType: 3
+      Description: 
+      BaseDamage: 90
+      Range: 5
+      EnergyCost: 15
+      Accuracy: 80
+      CriticalRate: 5
+      EffectValue: 0
+      EffectDuration: 0
+      RequiredTechnologies: []
+      CompatibleUnitTypes: 
+    RequiredTechnologies:
+    - advanced_ground_tech
+    SpecialAbilities:
+    - AbilityId: terrain_crush
+      AbilityName: "\u5730\u5F62\u538B\u5236"
+      AbilityType: 7
+      Description: "\u78BE\u538B\u5730\u5F62\u969C\u788D\u5E76\u9020\u6210\u8303\u56F4\u4F24\u5BB3"
+      EnergyCost: 20
+      CooldownTurns: 3
+      EffectValue: 40
+      Duration: 0
+      Range: 1
+      TriggerCondition: 0
+      RequiredLevel: 0
+      RequiredNTLevel: 0
+  - UnitId: aircraft_basic
+    UnitName: "F-200 \u6218\u6597\u673A"
+    UnitType: 1
+    Description: "\u6807\u51C6\u7A7A\u4E2D\u5355\u4F4D\uFF0C\u9AD8\u673A\u52A8\u6027\u4F46\u9632\u5FA1\u529B\u8F83\u5F31"
+    ModelPrefabPath: Prefabs/Units/Aircraft_Basic
+    RequiresPilot: 1
+    MaxHealth: 80
+    MaxEnergy: 100
+    MovementRange: 7
+    BaseArmor: 15
+    DefaultWeapons:
+    - WeaponId: air_missiles
+      WeaponName: "\u7A7A\u5BF9\u7A7A\u5BFC\u5F39"
+      WeaponType: 4
+      Description: 
+      BaseDamage: 60
+      Range: 5
+      EnergyCost: 12
+      Accuracy: 90
+      CriticalRate: 5
+      EffectValue: 0
+      EffectDuration: 0
+      RequiredTechnologies: []
+      CompatibleUnitTypes: 
+    RequiredTechnologies:
+    - basic_air_tech
+    SpecialAbilities:
+    - AbilityId: afterburner
+      AbilityName: "\u52A0\u529B\u71C3\u70E7"
+      AbilityType: 8
+      Description: "\u6682\u65F6\u63D0\u5347\u79FB\u52A8\u8303\u56F4\u548C\u95EA\u907F\u7387"
+      EnergyCost: 15
+      CooldownTurns: 2
+      EffectValue: 30
+      Duration: 1
+      Range: 0
+      TriggerCondition: 0
+      RequiredLevel: 0
+      RequiredNTLevel: 0
+  - UnitId: ship_basic
+    UnitName: "DD-500 \u9A71\u9010\u8230"
+    UnitType: 2
+    Description: "\u6C34\u57DF\u4F5C\u6218\u4E3B\u529B\uFF0C\u9002\u5408\u6D77\u6D0B\u6218\u573A"
+    ModelPrefabPath: Prefabs/Units/Ship_Basic
+    RequiresPilot: 1
+    MaxHealth: 180
+    MaxEnergy: 120
+    MovementRange: 4
+    BaseArmor: 35
+    DefaultWeapons:
+    - WeaponId: naval_cannon
+      WeaponName: "\u8230\u70AE"
+      WeaponType: 1
+      Description: 
+      BaseDamage: 75
+      Range: 6
+      EnergyCost: 18
+      Accuracy: 75
+      CriticalRate: 5
+      EffectValue: 0
+      EffectDuration: 0
+      RequiredTechnologies: []
+      CompatibleUnitTypes: 
+    RequiredTechnologies:
+    - basic_naval_tech
+    SpecialAbilities:
+    - AbilityId: sonar_sweep
+      AbilityName: "\u58F0\u7EB3\u626B\u63CF"
+      AbilityType: 3
+      Description: "\u63A2\u6D4B\u5E76\u653B\u51FB\u9644\u8FD1\u7684\u654C\u4EBA"
+      EnergyCost: 25
+      CooldownTurns: 3
+      EffectValue: 30
+      Duration: 0
+      Range: 3
+      TriggerCondition: 0
+      RequiredLevel: 0
+      RequiredNTLevel: 0
+  - UnitId: mass_robot_basic
+    UnitName: "GM-79 \u91CF\u4EA7\u578B\u673A\u5668\u4EBA"
+    UnitType: 3
+    Description: "\u6807\u51C6\u91CF\u4EA7\u578B\u673A\u5668\u4EBA\uFF0C\u5E73\u8861\u7684\u6027\u80FD\u548C\u9002\u5E94\u6027"
+    ModelPrefabPath: Prefabs/Units/MassRobot_Basic
+    RequiresPilot: 1
+    MaxHealth: 150
+    MaxEnergy: 150
+    MovementRange: 5
+    BaseArmor: 25
+    DefaultWeapons:
+    - WeaponId: beam_rifle_basic
+      WeaponName: "\u57FA\u7840\u5149\u675F\u6B65\u67AA"
+      WeaponType: 1
+      Description: 
+      BaseDamage: 65
+      Range: 4
+      EnergyCost: 10
+      Accuracy: 85
+      CriticalRate: 5
+      EffectValue: 0
+      EffectDuration: 0
+      RequiredTechnologies: []
+      CompatibleUnitTypes: 
+    - WeaponId: beam_saber_basic
+      WeaponName: "\u57FA\u7840\u5149\u675F\u5251"
+      WeaponType: 0
+      Description: 
+      BaseDamage: 80
+      Range: 1
+      EnergyCost: 5
+      Accuracy: 95
+      CriticalRate: 5
+      EffectValue: 0
+      EffectDuration: 0
+      RequiredTechnologies: []
+      CompatibleUnitTypes: 
+    RequiredTechnologies:
+    - basic_robotics_1
+    SpecialAbilities: []
+  - UnitId: gundam_basic
+    UnitName: "RX-78-2 \u9AD8\u8FBE"
+    UnitType: 5
+    Description: "\u9AD8\u6027\u80FD\u5168\u80FD\u578B\u673A\u5668\u4EBA\uFF0C\u51FA\u8272\u7684\u5E73\u8861\u6027\u80FD"
+    ModelPrefabPath: Prefabs/Units/Gundam_Basic
+    RequiresPilot: 1
+    MaxHealth: 300
+    MaxEnergy: 250
+    MovementRange: 6
+    BaseArmor: 40
+    DefaultWeapons:
+    - WeaponId: beam_rifle_advanced
+      WeaponName: "\u9AD8\u7EA7\u5149\u675F\u6B65\u67AA"
+      WeaponType: 1
+      Description: 
+      BaseDamage: 110
+      Range: 5
+      EnergyCost: 20
+      Accuracy: 90
+      CriticalRate: 5
+      EffectValue: 0
+      EffectDuration: 0
+      RequiredTechnologies: []
+      CompatibleUnitTypes: 
+    - WeaponId: beam_saber_advanced
+      WeaponName: "\u9AD8\u7EA7\u5149\u675F\u5251"
+      WeaponType: 0
+      Description: 
+      BaseDamage: 130
+      Range: 1
+      EnergyCost: 10
+      Accuracy: 95
+      CriticalRate: 5
+      EffectValue: 0
+      EffectDuration: 0
+      RequiredTechnologies: []
+      CompatibleUnitTypes: 
+    RequiredTechnologies:
+    - newtype_research_1
+    SpecialAbilities:
+    - AbilityId: core_fighter
+      AbilityName: "\u6838\u5FC3\u6218\u673A"
+      AbilityType: 5
+      Description: "\u5206\u79BB\u4E3A\u6218\u6597\u673A\u6A21\u5F0F\uFF0C\u63D0\u9AD8\u673A\u52A8\u6027\u4F46\u964D\u4F4E\u9632\u5FA1\u529B"
+      EnergyCost: 30
+      CooldownTurns: 3
+      EffectValue: 40
+      Duration: 2
+      Range: 0
+      TriggerCondition: 0
+      RequiredLevel: 0
+      RequiredNTLevel: 0
+  - UnitId: mazinger_basic
+    UnitName: "\u9B54\u795EZ"
+    UnitType: 4
+    Description: "\u642D\u8F7D\u5149\u5B50\u80FD\u6E90\u7684\u8D85\u7EA7\u673A\u5668\u4EBA\uFF0C\u9AD8\u9632\u5FA1\u529B\u548C\u8FD1\u6218\u80FD\u529B"
+    ModelPrefabPath: Prefabs/Units/Mazinger_Basic
+    RequiresPilot: 1
+    MaxHealth: 350
+    MaxEnergy: 280
+    MovementRange: 4
+    BaseArmor: 60
+    DefaultWeapons:
+    - WeaponId: rocket_punch
+      WeaponName: "\u706B\u7BAD\u62F3"
+      WeaponType: 5
+      Description: 
+      BaseDamage: 140
+      Range: 3
+      EnergyCost: 25
+      Accuracy: 85
+      CriticalRate: 5
+      EffectValue: 0
+      EffectDuration: 0
+      RequiredTechnologies: []
+      CompatibleUnitTypes: 
+    - WeaponId: breast_fire
+      WeaponName: "\u80F8\u90E8\u706B\u7130"
+      WeaponType: 2
+      Description: 
+      BaseDamage: 120
+      Range: 2
+      EnergyCost: 35
+      Accuracy: 80
+      CriticalRate: 5
+      EffectValue: 0
+      EffectDuration: 0
+      RequiredTechnologies: []
+      CompatibleUnitTypes: 
+    RequiredTechnologies:
+    - solar_energy_tech
+    - super_alloy_tech
+    SpecialAbilities:
+    - AbilityId: photon_power
+      AbilityName: "\u5149\u5B50\u529B\u91CF"
+      AbilityType: 8
+      Description: "\u6FC0\u6D3B\u5149\u5B50\u80FD\u91CF\uFF0C\u5927\u5E45\u63D0\u5347\u6240\u6709\u5C5E\u6027"
+      EnergyCost: 50
+      CooldownTurns: 5
+      EffectValue: 50
+      Duration: 2
+      Range: 0
+      TriggerCondition: 0
+      RequiredLevel: 0
+      RequiredNTLevel: 0
+  - UnitId: getter_basic
+    UnitName: "\u771F\u76D6\u5854"
+    UnitType: 6
+    Description: "\u4F7F\u7528\u76D6\u5854\u5C04\u7EBF\u7684\u9AD8\u653B\u51FB\u529B\u8D85\u7EA7\u673A\u5668\u4EBA\uFF0C\u4E09\u79CD\u5F62\u6001\u53EF\u53D8"
+    ModelPrefabPath: Prefabs/Units/Getter_Basic
+    RequiresPilot: 1
+    MaxHealth: 280
+    MaxEnergy: 300
+    MovementRange: 5
+    BaseArmor: 35
+    DefaultWeapons:
+    - WeaponId: getter_beam
+      WeaponName: "\u76D6\u5854\u5C04\u7EBF"
+      WeaponType: 3
+      Description: 
+      BaseDamage: 160
+      Range: 4
+      EnergyCost: 40
+      Accuracy: 85
+      CriticalRate: 5
+      EffectValue: 0
+      EffectDuration: 0
+      RequiredTechnologies: []
+      CompatibleUnitTypes: 
+    - WeaponId: getter_tomahawk
+      WeaponName: "\u76D6\u5854\u6218\u65A7"
+      WeaponType: 0
+      Description: 
+      BaseDamage: 150
+      Range: 1
+      EnergyCost: 20
+      Accuracy: 90
+      CriticalRate: 5
+      EffectValue: 0
+      EffectDuration: 0
+      RequiredTechnologies: []
+      CompatibleUnitTypes: 
+    RequiredTechnologies:
+    - getter_rays_tech
+    - transform_tech
+    SpecialAbilities:
+    - AbilityId: getter_change
+      AbilityName: "\u76D6\u5854\u53D8\u5F62"
+      AbilityType: 5
+      Description: "\u5728\u4E09\u79CD\u5F62\u6001\u95F4\u5207\u6362\uFF1A\u9E70(\u8FDC\u7A0B)\u3001\u718A(\u8FD1\u6218)\u3001\u8C79(\u673A\u52A8)"
+      EnergyCost: 30
+      CooldownTurns: 2
+      EffectValue: 0
+      Duration: 0
+      Range: 0
+      TriggerCondition: 0
+      RequiredLevel: 0
+      RequiredNTLevel: 0
+    - AbilityId: shine_spark
+      AbilityName: "\u95EA\u5149\u706B\u82B1"
+      AbilityType: 3
+      Description: "\u5927\u8303\u56F4\u76D6\u5854\u80FD\u91CF\u7206\u53D1"
+      EnergyCost: 60
+      CooldownTurns: 4
+      EffectValue: 140
+      Duration: 0
+      Range: 3
+      TriggerCondition: 0
+      RequiredLevel: 0
+      RequiredNTLevel: 0
+  - UnitId: eva_basic
+    UnitName: "\u521D\u53F7\u673A"
+    UnitType: 7
+    Description: "\u751F\u7269\u9002\u5E94\u578B\u8D85\u7EA7\u673A\u5668\u4EBA\uFF0CAT\u529B\u573A\u548C\u9AD8\u9002\u5E94\u6027"
+    ModelPrefabPath: Prefabs/Units/Eva_Basic
+    RequiresPilot: 1
+    MaxHealth: 320
+    MaxEnergy: 270
+    MovementRange: 5
+    BaseArmor: 45
+    DefaultWeapons:
+    - WeaponId: progressive_knife
+      WeaponName: "\u6E10\u8FDB\u5315\u9996"
+      WeaponType: 0
+      Description: 
+      BaseDamage: 130
+      Range: 1
+      EnergyCost: 15
+      Accuracy: 95
+      CriticalRate: 5
+      EffectValue: 0
+      EffectDuration: 0
+      RequiredTechnologies: []
+      CompatibleUnitTypes: 
+    - WeaponId: positron_rifle
+      WeaponName: "\u6B63\u7535\u5B50\u6B65\u67AA"
+      WeaponType: 3
+      Description: 
+      BaseDamage: 170
+      Range: 6
+      EnergyCost: 45
+      Accuracy: 75
+      CriticalRate: 5
+      EffectValue: 0
+      EffectDuration: 0
+      RequiredTechnologies: []
+      CompatibleUnitTypes: 
+    RequiredTechnologies:
+    - at_field_tech
+    - bio_sync_tech
+    SpecialAbilities:
+    - AbilityId: at_field
+      AbilityName: "AT\u529B\u573A"
+      AbilityType: 2
+      Description: "\u5C55\u5F00\u7EDD\u5BF9\u9886\u57DF\uFF0C\u5927\u5E45\u51CF\u5C11\u4F24\u5BB3"
+      EnergyCost: 40
+      CooldownTurns: 3
+      EffectValue: 70
+      Duration: 2
+      Range: 0
+      TriggerCondition: 0
+      RequiredLevel: 0
+      RequiredNTLevel: 0
+    - AbilityId: berserk
+      AbilityName: "\u72C2\u66B4\u5316"
+      AbilityType: 0
+      Description: "\u5931\u63A7\u72B6\u6001\uFF0C\u5927\u5E45\u63D0\u5347\u653B\u51FB\u529B\u4F46\u65E0\u6CD5\u63A7\u5236"
+      EnergyCost: 0
+      CooldownTurns: 10
+      EffectValue: 100
+      Duration: 3
+      Range: 0
+      TriggerCondition: 0
+      RequiredLevel: 0
+      RequiredNTLevel: 0
+  - UnitId: transformer_basic
+    UnitName: "\u64CE\u5929\u67F1"
+    UnitType: 8
+    Description: "\u5177\u6709\u9AD8\u5EA6\u53D8\u5F62\u80FD\u529B\u7684\u673A\u5668\u4EBA\uFF0C\u53EF\u5728\u8F66\u8F86\u548C\u673A\u5668\u4EBA\u5F62\u6001\u95F4\u5207\u6362"
+    ModelPrefabPath: Prefabs/Units/Transformer_Basic
+    RequiresPilot: 0
+    MaxHealth: 290
+    MaxEnergy: 260
+    MovementRange: 6
+    BaseArmor: 40
+    DefaultWeapons:
+    - WeaponId: ion_blaster
+      WeaponName: "\u79BB\u5B50\u7206\u7834\u67AA"
+      WeaponType: 1
+      Description: 
+      BaseDamage: 120
+      Range: 5
+      EnergyCost: 25
+      Accuracy: 85
+      CriticalRate: 5
+      EffectValue: 0
+      EffectDuration: 0
+      RequiredTechnologies: []
+      CompatibleUnitTypes: 
+    - WeaponId: energon_axe
+      WeaponName: "\u80FD\u91CF\u65A7"
+      WeaponType: 0
+      Description: 
+      BaseDamage: 140
+      Range: 1
+      EnergyCost: 20
+      Accuracy: 90
+      CriticalRate: 5
+      EffectValue: 0
+      EffectDuration: 0
+      RequiredTechnologies: []
+      CompatibleUnitTypes: 
+    RequiredTechnologies:
+    - transform_tech
+    - ai_integration
+    SpecialAbilities:
+    - AbilityId: transform
+      AbilityName: "\u53D8\u5F62"
+      AbilityType: 5
+      Description: "\u5728\u8F66\u8F86\u548C\u673A\u5668\u4EBA\u5F62\u6001\u95F4\u5207\u6362\uFF0C\u63D0\u9AD8\u673A\u52A8\u6027\u6216\u6218\u6597\u529B"
+      EnergyCost: 15
+      CooldownTurns: 1
+      EffectValue: 30
+      Duration: 0
+      Range: 0
+      TriggerCondition: 0
+      RequiredLevel: 0
+      RequiredNTLevel: 0
+    - AbilityId: matrix_power
+      AbilityName: "\u9886\u5BFC\u6A21\u5757"
+      AbilityType: 8
+      Description: "\u6FC0\u6D3B\u9886\u5BFC\u6A21\u5757\u80FD\u91CF\uFF0C\u63D0\u5347\u81EA\u8EAB\u548C\u5468\u56F4\u53CB\u519B\u80FD\u529B"
+      EnergyCost: 50
+      CooldownTurns: 5
+      EffectValue: 40
+      Duration: 2
+      Range: 3
+      TriggerCondition: 0
+      RequiredLevel: 0
+      RequiredNTLevel: 0
