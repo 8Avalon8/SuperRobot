@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using SuperRobot.Core;
 
 namespace SuperRobot
 {
@@ -40,8 +41,9 @@ namespace SuperRobot
             _components[componentType] = component;
             component.Initialize();
 
-            // 注册到EntityManager
-            GameManager.Instance.EntityManager.RegisterComponentForEntity<T>(_entityId);
+            // 通过服务定位器注册到EntityManager
+            var entityManagerService = ServiceLocator.GetService<IEntityManagerService>();
+            entityManagerService?.EntityManager.RegisterComponentForEntity<T>(_entityId);
 
             return component;
         }
@@ -99,8 +101,9 @@ namespace SuperRobot
                 component.Cleanup();
                 _components.Remove(componentType);
 
-                // 从EntityManager移除注册
-                GameManager.Instance.EntityManager.UnregisterComponentForEntity<T>(_entityId);
+                // 通过服务定位器从EntityManager移除注册
+                var entityManagerService = ServiceLocator.GetService<IEntityManagerService>();
+                entityManagerService?.EntityManager.UnregisterComponentForEntity<T>(_entityId);
 
                 return true;
             }

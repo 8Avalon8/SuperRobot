@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using SuperRobot.Core;
 
 namespace SuperRobot
 {
@@ -9,7 +10,7 @@ namespace SuperRobot
     {
         private Dictionary<int, GameEntity>      _units         = new Dictionary<int, GameEntity>();
         private Dictionary<string, UnitTemplate> _unitTemplates = new Dictionary<string, UnitTemplate>();
-        private IMapManager                      _mapManager => GameManager.Instance.MapManager;
+        private IMapManager                      _mapManager => GetService<IMapManagerService>()?.MapManager;
 
         public override void Initialize()
         {
@@ -44,44 +45,12 @@ namespace SuperRobot
             // 创建单位实体
             var unitEntity = EntityManager.CreateEntity("Unit");
 
-            // 添加基础组件
-            var statsComp = unitEntity.AddComponent<UnitStatsComponent>();
-            statsComp.Initialize(template);
+            // 使用组件工厂创建标准组件集合
+            ComponentFactory.CreateUnitComponents(unitEntity, template);
 
-            var positionComp = unitEntity.AddComponent<PositionComponent>();
-            positionComp.Position = position;
-
-            // 添加特定类型单位的组件
-            switch (template.UnitType)
-            {
-                case UnitType.Tank:
-                    unitEntity.AddComponent<GroundMovementComponent>();
-                    break;
-                case UnitType.Aircraft:
-                    unitEntity.AddComponent<AirMovementComponent>();
-                    break;
-                case UnitType.Gundam:
-                case UnitType.Getter:
-                case UnitType.BioAdaptive:
-                case UnitType.Transformer:
-                    unitEntity.AddComponent<SuperRobotComponent>();
-                    break;
-                default:
-                    throw new NotImplementedException("为实现");
-            }
-
-            // 如果是机甲类型，添加驾驶员组件
-            if (template.RequiresPilot)
-            {
-                unitEntity.AddComponent<PilotComponent>();
-            }
-
-            // 添加武器组件
-            foreach (var weaponTemplate in template.DefaultWeapons)
-            {
-                var weaponComp = unitEntity.AddComponent<WeaponComponent>();
-                weaponComp.Initialize(weaponTemplate);
-            }
+            // 设置位置
+            var positionComp = unitEntity.GetComponent<PositionComponent>();
+            positionComp.SetPosition(position);
 
             _units[unitEntity.EntityId] = unitEntity;
 

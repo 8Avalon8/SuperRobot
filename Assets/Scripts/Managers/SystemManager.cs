@@ -1,42 +1,60 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using SuperRobot.Core;
 
 namespace SuperRobot
 {
     public class SystemManager
     {
         // 系统存储
-    private Dictionary<Type, GameSystem> _systems = new Dictionary<Type, GameSystem>();
-    
-    // 更新顺序
-    private List<GameSystem> _orderedSystems = new List<GameSystem>();
-    
-    // 系统启用状态
-    private HashSet<Type> _enabledSystems = new HashSet<Type>();
-    
-    /// <summary>
-    /// 注册系统
-    /// </summary>
-    public T RegisterSystem<T>(T system) where T : GameSystem
-    {
-        Type systemType = typeof(T);
+        private Dictionary<Type, GameSystem> _systems = new Dictionary<Type, GameSystem>();
         
-        if (_systems.ContainsKey(systemType))
+        // 更新顺序
+        private List<GameSystem> _orderedSystems = new List<GameSystem>();
+        
+        // 系统启用状态
+        private HashSet<Type> _enabledSystems = new HashSet<Type>();
+        
+        // 服务容器引用
+        private IServiceContainer _serviceContainer;
+        
+        /// <summary>
+        /// 设置服务容器
+        /// </summary>
+        public void SetServiceContainer(IServiceContainer serviceContainer)
         {
-            Debug.LogWarning($"System of type {systemType.Name} already registered.");
-            return (T)_systems[systemType];
+            _serviceContainer = serviceContainer;
         }
         
-        _systems[systemType] = system;
-        _orderedSystems.Add(system);
-        _enabledSystems.Add(systemType);
-        
-        // 初始化系统
-        system.Initialize();
-        
-        return system;
-    }
+        /// <summary>
+        /// 注册系统
+        /// </summary>
+        public T RegisterSystem<T>(T system) where T : GameSystem
+        {
+            Type systemType = typeof(T);
+            
+            if (_systems.ContainsKey(systemType))
+            {
+                Debug.LogWarning($"System of type {systemType.Name} already registered.");
+                return (T)_systems[systemType];
+            }
+            
+            _systems[systemType] = system;
+            _orderedSystems.Add(system);
+            _enabledSystems.Add(systemType);
+            
+            // 注入服务依赖
+            if (_serviceContainer != null)
+            {
+                system.InjectServices(_serviceContainer);
+            }
+            
+            // 初始化系统
+            system.Initialize();
+            
+            return system;
+        }
     
     /// <summary>
     /// 获取系统

@@ -29,7 +29,7 @@ namespace SuperRobot
         private GameObject _productionUI;
         private GameObject _pilotUI;
 
-        private UIManager _uiManager => UIManager.Instance;
+        private IUIManager  _uiManager  => UIDocManager.Instance;
         private IMapManager _mapManager => GameManager.Instance.MapManager;
 
         // UI预制体路径
@@ -518,19 +518,23 @@ namespace SuperRobot
 
             // 获取单位
             var unitSystem = GameManager.Instance.SystemManager.GetSystem<UnitManagementSystem>();
-            var unit = unitSystem.GetUnit(_selectedUnitId);
-            
+            var unit       = unitSystem.GetUnit(_selectedUnitId);
+
             if (unit != null)
             {
+                var actions = new List<ActionMenuItem>();
                 // 显示操作按钮
-                _uiManager.ShowSelections(new List<string> { "移动"},(index)=>{
-                    if(index == 0)
+                actions.Add(new ActionMenuItem
+                {
+                    Label      = "移动",
+                    ActionType = ActionType.Move,
+                    OnSelected = () =>
                     {
                         // 获取移动范围
                         var movementSystem = GameManager.Instance.SystemManager.GetSystem<UnitMovementSystem>();
-                        var posComp = unit.GetComponent<PositionComponent>();
+                        var posComp        = unit.GetComponent<PositionComponent>();
                         isSelectMove = true;
-                        
+
                         if (posComp != null)
                         {
                             // 显示移动范围
@@ -538,7 +542,15 @@ namespace SuperRobot
                         }
                     }
                 });
-                
+                // 取消
+                actions.Add(new ActionMenuItem {
+                    Label = "取消",
+                    ActionType = ActionType.Cancel,
+                    OnSelected = () => {
+                        _uiManager.DeselectEntity();
+                    }
+                });
+                _uiManager.ShowActionMenu(unit.EntityId, new Vector2(Screen.width / 2, Screen.height / 2), actions);
             }
         }
 
@@ -557,7 +569,7 @@ namespace SuperRobot
             var ranges = _mapManager.GetMoveRange(posComp.Position, moveRange);
 
             // 高亮显示可移动范围
-            _uiManager.HighlightCells(ranges, Color.green);
+            _uiManager.HighlightCells(ranges, HighlightType.Movement);
         }
 
         /// <summary>
@@ -575,37 +587,43 @@ namespace SuperRobot
                 var baseComp = baseEntity.GetComponent<BaseComponent>();
                 if (baseComp != null)
                 {
-                    _uiManager.ShowSimpleInfo(baseComp.BaseName);
+                    ShowBaseInfo(baseEntity);
                     // 显示可操作按钮
-                    _uiManager.ShowSelections(new List<string> { "生产单位", "研究技术" }, (index) =>
-                    {
-                        if (index == 0)
-                        {
+                    var actions = new List<ActionMenuItem>();
+                    actions.Add(new ActionMenuItem {
+                        Label      = "生产单位",
+                        ActionType = ActionType.Build,
+                        OnSelected = () => {
                             // 生产单位
-                            // 生产位置在基地旁边一格
                             var posComp = baseEntity.GetComponent<PositionComponent>();
                             if (posComp == null)
                                 return;
                             var range = _mapManager.GetMoveRange(posComp.Position, 1);
-                            var pos = range[0];
+                            var pos   = range[0];
                             EventManager.TriggerEvent(new UnitProductionCompletedEvent()
                             {
-                                BaseId = _selectedBaseId,
+                                BaseId         = _selectedBaseId,
                                 UnitTemplateId = "gundam_basic",
-                                Position = pos
-                            });
-                        }
-                        else if (index == 1)
-                        {
-                            // 研究技术
-                            EventManager.TriggerEvent(new TechResearchCompletedEvent()
-                            {
-                                TechId = "basic_energy_1"
+                                Position       = pos
                             });
                         }
                     });
+                    // 取消
+                    actions.Add(new ActionMenuItem {
+                        Label = "取消",
+                        ActionType = ActionType.Cancel,
+                        OnSelected = () => {
+                            _uiManager.DeselectEntity();
+                        }
+                    });
+                    _uiManager.ShowActionMenu(baseEntity.EntityId, new Vector2(Screen.width / 2, Screen.height / 2), actions);
                 }
             }
+        }
+
+        private void ShowBaseInfo(GameEntity baseEntity)
+        {
+            _uiManager.ShowBaseInfo(baseEntity.EntityId, new Vector2(Screen.width / 2, Screen.height / 2));
         }
 
         /// <summary>
@@ -621,7 +639,7 @@ namespace SuperRobot
             {
                 if (entities[0].GetComponent<BaseComponent>() != null)
                 {
-                    _uiManager.ShowSimpleInfo(entities[0].GetComponent<BaseComponent>().BaseName);
+                    ShowBaseInfo(entities[0]);
                     _selectedBaseId = entities[0].EntityId;
                     Debug.Log($"OnBaseSelected: {_selectedBaseId}");
                     // 发送基地选择事件
@@ -629,7 +647,32 @@ namespace SuperRobot
                 }
                 else if (entities[0].GetComponent<UnitStatsComponent>() != null)
                 {
-                    _uiManager.ShowSimpleInfo(entities[0].GetComponent<UnitStatsComponent>().UnitName);
+                    var actions = new List<ActionMenuItem>();
+                    _uiManager.ShowActionMenu(entities[0].EntityId, new Vector2(Screen.width / 2, Screen.height / 2), actions);
+                    actions.Add(new ActionMenuItem {
+                        Label = "移动",
+                        ActionType = ActionType.Move,
+                        OnSelected = () => {
+                            // 获取移动范围
+                            var movementSystem = GameManager.Instance.SystemManager.GetSystem<UnitMovementSystem>();
+                            var posComp = entities[0].GetComponent<PositionComponent>();
+                            isSelectMove = true;
+                            
+                            if (posComp != null)
+                            {
+                                // 显示移动范围
+                                ShowMovementRange(entities[0]);
+                            }
+                        }
+                    });
+                    // 取消
+                    actions.Add(new ActionMenuItem {
+                        Label = "取消",
+                        ActionType = ActionType.Cancel,
+                        OnSelected = () => {
+                            _uiManager.DeselectEntity();
+                        }
+                    });
                     _selectedUnitId = entities[0].EntityId;
                     Debug.Log($"OnUnitSelected: {_selectedUnitId}");
                 }
@@ -658,7 +701,7 @@ namespace SuperRobot
             // 更新UI显示
             var terrainType = _mapManager.GetCellType(evt.GridPosition);
             
-            _uiManager.ShowSimpleInfo(terrainType);
+            _uiManager.ShowTerrainInfo(evt.GridPosition, new Vector2(Screen.width / 2, Screen.height));
         }
 
         private void OnUnitMovementCompleted(UnitMovementCompletedEvent evt)
@@ -667,7 +710,7 @@ namespace SuperRobot
             _uiManager.ClearHighlights();
             
             // 更新UI
-            _uiManager.UpdateUnitInfo(evt.UnitId);
+            _uiManager.ShowUnitInfo(evt.UnitId, new Vector2(Screen.width / 2, Screen.height));
             
             // 检查是否有敌人在攻击范围内
             //CheckForEnemiesInRange(evt.UnitId);

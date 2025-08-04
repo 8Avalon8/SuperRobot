@@ -27,7 +27,7 @@ namespace SuperRobot
         private void Start()
         {
             map = TerrainGridSystem.instance;
-            
+            map.Redraw();
             // 注册监听
             map.OnCellClick += onCellClick;
         }
@@ -39,6 +39,7 @@ namespace SuperRobot
 
         private void onCellClick(TerrainGridSystem tgs, int cellIndex, int buttonIndex)
         {
+            return;
             var cell = map.cells[cellIndex];
             var cellPos = new Vector2Int(cell.row, cell.column);
             // 发送事件
@@ -125,6 +126,45 @@ namespace SuperRobot
 
         public void SetEnableTouch(bool enable)
         {
+        }
+
+        public void HighlightCells(List<Vector2Int> cells, Color color)
+        {
+            ClearHighlightCells();
+            foreach (var cell in cells)
+            {
+                _highlightedCells.Add(map.CellGetIndex(cell.x, cell.y));
+            }
+            map.CellBlink(_highlightedCells, color, 1f);
+        }
+
+        public void ClearHighlights(List<Vector2Int> cells)
+        {
+            map.CellFadeOut(_highlightedCells, Color.blue, 1f);
+            _highlightedCells.Clear();
+        }
+
+        public Vector2Int ScreenToCell(Vector2 screenPosition)
+        {
+            var cell = map.CellGetAtScreenPosition(screenPosition);
+            if (cell == null)
+                return new Vector2Int(-1, -1);
+            return new Vector2Int(cell.row, cell.column);
+        }
+
+        public bool IsValidCell(Vector2Int cellPosition)
+        {
+            var cell = map.cells[map.CellGetIndex(cellPosition.x, cellPosition.y)];
+            return cell != null;
+        }
+
+        public float GetMovementCost(Vector2Int cellPosition, UnitType unitType)
+        {
+            var cell = map.cells[map.CellGetIndex(cellPosition.x, cellPosition.y)];
+            var costNum = cell.attrib?.GetField("movementCost");
+            if (costNum == null)
+                return 1f;
+            return (float)costNum;
         }
     }
 }

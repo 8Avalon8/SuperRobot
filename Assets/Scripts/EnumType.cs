@@ -17,10 +17,12 @@ namespace SuperRobot
     public enum UnitType
     {
         // 常规军力
+        Infantry,
         Tank,               // 坦克
         Aircraft,           // 战机
         Ship,               // 舰船
         MassProdRobot,      // 量产机器人
+        Naval, 
 
         // 超级机器人类型
         SolarPowered,       // 太阳能系列（魔神Z类）

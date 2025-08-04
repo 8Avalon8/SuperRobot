@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using TGS;
 using UnityEngine;
+using SuperRobot.Core;
 
 namespace SuperRobot
 {
@@ -10,9 +12,14 @@ namespace SuperRobot
         public static GameManager Instance => _instance;
         
         // 核心管理器
-        public EntityManager EntityManager { get; private set; }
-        public SystemManager SystemManager { get; private set; }
-        public IMapManager MapManager { get; private set; }
+        public EntityManager         EntityManager         { get; private set; }
+        public ImprovedSystemManager SystemManager         { get; private set; }
+        public ImprovedSystemManager ImprovedSystemManager { get; private set; }
+        public IMapManager           MapManager            { get; private set; }
+        
+        // 服务容器
+        private IServiceContainer _serviceContainer;
+        public IServiceContainer ServiceContainer => _serviceContainer;
         
         // 游戏状态
         private GameStateMachine _stateMachine;
@@ -22,7 +29,6 @@ namespace SuperRobot
         [SerializeField] private GameConfig _gameConfig;
         public GameConfig GameConfig => _gameConfig;
 
-        
         // 回合管理
         public int CurrentTurn => TurnManager.CurrentTurn;
         
@@ -36,22 +42,87 @@ namespace SuperRobot
             
             _instance = this;
             DontDestroyOnLoad(gameObject);
-            _gameConfig = Resources.Load<GameConfig>("Data/GameConfig");
-            // 初始化管理器
-            EntityManager = new EntityManager();
-            SystemManager = new SystemManager();
             
-            // 初始化状态机
-            _stateMachine = new GameStateMachine();
-            MapManager = new GameObject("MapManager").AddComponent<TGSMapManager>();
+            // 初始化服务容器
+            InitializeServiceContainer();
+            
+            // 初始化核心组件
+            InitializeCoreComponents();
             
             // 初始化系统
             InitializeSystems();
         }
         
+        private void InitializeServiceContainer()
+        {
+            _serviceContainer = new ServiceContainer();
+        }
+        
+        private void InitializeCoreComponents()
+        {
+            // 加载游戏配置
+            _gameConfig = Resources.Load<GameConfig>("Data/GameConfig");
+            
+            // 初始化管理器
+            EntityManager = new EntityManager();
+            
+            // 设置SystemManager的服务容器
+            SystemManager.SetServiceContainer(_serviceContainer);
+            
+            // 初始化状态机
+            _stateMachine = new GameStateMachine();
+            MapManager = new GameObject("MapManager").AddComponent<TGSMapManager>();
+            
+            // 注册核心服务
+            RegisterCoreServices();
+        }
+        
+        private void RegisterCoreServices()
+        {
+            _serviceContainer.RegisterService<IEntityManagerService>(new EntityManagerService(EntityManager));
+            _serviceContainer.RegisterService<ISystemManagerService>(new SystemManagerService(SystemManager));
+            _serviceContainer.RegisterService<IEventManagerService>(new EventManagerService(EventManager.Instance));
+            _serviceContainer.RegisterService<IMapManagerService>(new MapManagerService(MapManager));
+            _serviceContainer.RegisterService<IGameConfigService>(new GameConfigService(_gameConfig));
+            
+            // 初始化服务定位器（向后兼容）
+            ServiceLocator.Initialize(_serviceContainer);
+        }
+        
         private void InitializeSystems()
         {
-            // 注册核心系统（按照执行顺序）
+                InitializeImprovedSystems();
+        }
+        
+        private void InitializeImprovedSystems()
+        {
+            // 注册核心系统（分阶段，有优先级）
+            
+            // 预更新阶段 - 输入和基础系统
+            ImprovedSystemManager.RegisterSystem(new InputSystem(), SystemPhase.PreUpdate, SystemPriority.Critical);
+            ImprovedSystemManager.RegisterSystem(new EventSystem(), SystemPhase.PreUpdate, SystemPriority.High);
+            
+            // 主更新阶段 - 游戏逻辑系统
+            ImprovedSystemManager.RegisterSystem(new ResourceSystem(), SystemPhase.Update, SystemPriority.High);
+            ImprovedSystemManager.RegisterSystem(new TechTreeSystem(), SystemPhase.Update, SystemPriority.Normal);
+            ImprovedSystemManager.RegisterSystem(new UnitManagementSystem(), SystemPhase.Update, SystemPriority.High);
+            ImprovedSystemManager.RegisterSystem(new PilotManagementSystem(), SystemPhase.Update, SystemPriority.Normal);
+            ImprovedSystemManager.RegisterSystem(new BaseManagementSystem(), SystemPhase.Update, SystemPriority.Normal);
+            ImprovedSystemManager.RegisterSystem(new ProductionSystem(), SystemPhase.Update, SystemPriority.Normal);
+            ImprovedSystemManager.RegisterSystem(new BattleSystem(), SystemPhase.Update, SystemPriority.High);
+            ImprovedSystemManager.RegisterSystem(new UnitMovementSystem(), SystemPhase.Update, SystemPriority.High);
+            ImprovedSystemManager.RegisterSystem(new AISystem(), SystemPhase.Update, SystemPriority.Normal);
+            
+            // 后更新阶段 - UI和视觉系统
+            ImprovedSystemManager.RegisterSystem(new UISystem(), SystemPhase.PostUpdate, SystemPriority.Low);
+            
+            // 启用性能分析
+            ImprovedSystemManager.EnableProfiling = Application.isEditor;
+        }
+        
+        private void InitializeLegacySystems()
+        {
+            // 传统的系统注册方式（向后兼容）
             SystemManager.RegisterSystem(new InputSystem());
             SystemManager.RegisterSystem(new ResourceSystem());
             SystemManager.RegisterSystem(new TechTreeSystem());
@@ -71,11 +142,8 @@ namespace SuperRobot
             // 更新状态机
             _stateMachine.Update();
             
-            // 处理事件队列
-            EventManager.Instance.ProcessEventQueue();
-            
             // 执行系统
-            SystemManager.ExecuteActiveSystems();
+                ImprovedSystemManager.ExecuteAllSystems();
         }
         
         /// <summary>
@@ -83,6 +151,7 @@ namespace SuperRobot
         /// </summary>
         public void StartNewGame()
         {
+            TerrainGridSystem.instance.Redraw();
             // 重置所有系统
             SystemManager.ResetAllSystems();
             

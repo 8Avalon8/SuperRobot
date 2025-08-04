@@ -17,11 +17,17 @@ namespace SuperRobot
         Vector3 GetCellWorldPosition(Vector2Int cellPos);
         string GetCellType(Vector2Int cellPos);
         Vector2Int GetMapCenterPosition();
-        
+
         void SetEnableTouch(bool enable);
+
+        void HighlightCells(List<Vector2Int> cells, Color color);
+        void ClearHighlights(List<Vector2Int> cells);
+        Vector2Int ScreenToCell(Vector2 screenPosition);
+        bool IsValidCell(Vector2Int cellPosition);
+        float GetMovementCost(Vector2Int cellPosition, UnitType unitType);
     }
 
-    public class WMSKMap : MonoBehaviour,IMapManager
+    public class WMSKMap : MonoBehaviour, IMapManager
     {
         WMSK map;
 
@@ -115,9 +121,34 @@ namespace SuperRobot
             var cell = map.GetCell(cellIndex);
             return new Vector2Int(cell.column, cell.row);
         }
-        
+
         public void SetEnableTouch(bool enable)
         {
+        }
+
+        public void HighlightCells(List<Vector2Int> cells, Color color)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ClearHighlights(List<Vector2Int> cells)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Vector2Int ScreenToCell(Vector2 screenPosition)
+        {
+            throw new NotImplementedException();
+        }
+
+        public bool IsValidCell(Vector2Int cellPosition)
+        {
+            throw new NotImplementedException();
+        }
+
+        public float GetMovementCost(Vector2Int cellPosition, UnitType unitType)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -377,6 +377,14 @@ namespace SuperRobot
         // 检查是否是敌方单位
         return false;
     }
+
+    // GetAttackRange
+    public int GetAttackRange(int unitId)
+    {
+        // 获取单位攻击范围
+        return 0;
+    }
+    
     
     
     public void ExecuteAttack(int attackerUnitId, int targetUnitId, int weaponIndex)
